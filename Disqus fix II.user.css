@@ -1,0 +1,824 @@
+/* ==UserStyle==
+@name        Disqus fix II
+@description Fix Disqus layout and appearance
+@version     3.2
+@author      Box of Cotton Swabs
+@match       *://the-avocado.org/*
+@match       *://*.disqus.com/*
+==/UserStyle== */
+
+:root {
+	--disqus-accent: #2e9fff;
+	--disqus-radius-sm: 4px;
+	--disqus-radius-md: 6px;
+	--disqus-avatar-size-parent: 50px;
+	--disqus-avatar-size-child: 40px;
+	--disqus-text-on-dark: #fff;
+	--parent-dark-bg: #111;
+}
+
+body.roboto,
+body.roboto input,
+body.roboto select,
+body.roboto textarea {
+	font-family: "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* The Avocado parent page night mode plugin */
+body.wp-theme-gazette.wp-night-mode-on,
+body.wp-theme-gazette.wp-night-mode-on *:not(a) {
+	color: var(--disqus-text-on-dark) !important;
+}
+
+/* Disqus iframe dark-mode text (uses Disqus body/theme markers, not parent toggle class) */
+html[data-theme="dark"] body.roboto,
+body.roboto[data-theme="dark"],
+html[data-color-scheme="dark"] body.roboto,
+body.roboto[data-color-scheme="dark"],
+body.roboto.dark,
+body.roboto.theme-dark {
+	color: var(--disqus-text-on-dark) !important;
+}
+
+/* iOS Safari dark-mode edge matching (CSS-only usersheet path) */
+html.wp-night-mode-on,
+html:has(body.wp-night-mode-on),
+body.wp-theme-gazette.wp-night-mode-on {
+	background-color: var(--parent-dark-bg) !important;
+	color-scheme: dark !important;
+}
+
+body.wp-theme-gazette.wp-night-mode-on::before,
+body.wp-theme-gazette.wp-night-mode-on::after {
+	content: "";
+	position: fixed;
+	left: 0;
+	right: 0;
+	pointer-events: none;
+	background: var(--parent-dark-bg);
+	z-index: 2147483646;
+}
+
+body.wp-theme-gazette.wp-night-mode-on::before {
+	top: 0;
+	height: env(safe-area-inset-top, 0);
+}
+
+body.wp-theme-gazette.wp-night-mode-on::after {
+	bottom: 0;
+	height: env(safe-area-inset-bottom, 0);
+}
+
+/* Parent header popup menus: remove bright frame in night mode */
+body.wp-night-mode-on .main-navigation ul ul,
+body.wp-night-mode-on .main-navigation ul ul li {
+	background-color: #191919 !important;
+	border-color: #191919 !important;
+}
+
+/* Mobile expanded menu container: remove heavy white frame in dark mode */
+body.wp-night-mode-on .main-navigation.toggled > div,
+body.wp-night-mode-on.long-menu .main-navigation > div,
+body.wp-night-mode-on .main-navigation.toggled .nav-menu,
+body.wp-night-mode-on .main-navigation.toggled .menu {
+	background-color: #191919 !important;
+	border-color: #191919 !important;
+	box-shadow: none !important;
+	outline-color: #191919 !important;
+}
+
+body.wp-night-mode-on.long-menu .main-navigation > div:before,
+body.wp-night-mode-on .main-navigation.toggled > div:before {
+	background-color: #191919 !important;
+	border-color: #191919 !important;
+}
+
+/* Night mode: replace logo bitmap with SVG-keyed version (white -> transparent) */
+body.wp-night-mode-on .site-branding .site-logo-link {
+	position: relative;
+	display: inline-block;
+	line-height: 0;
+}
+
+body.wp-night-mode-on .site-branding .site-logo {
+	opacity: 0 !important;
+}
+
+body.wp-night-mode-on .site-branding .site-logo-link::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyNzAgNTgnIHByZXNlcnZlQXNwZWN0UmF0aW89J3hNaWRZTWlkIG1lZXQnPjxkZWZzPjxmaWx0ZXIgaWQ9J2snIGNvbG9yLWludGVycG9sYXRpb24tZmlsdGVycz0nc1JHQic+PGZlQ29sb3JNYXRyaXggdHlwZT0nbWF0cml4JyB2YWx1ZXM9JzEgMCAwIDAgMCAwIDEgMCAwIDAgMCAwIDEgMCAwIC0xIC0xIC0xIDAgMi45Jy8+PGZlQ29tcG9uZW50VHJhbnNmZXI+PGZlRnVuY0EgdHlwZT0nZ2FtbWEnIGFtcGxpdHVkZT0nMScgZXhwb25lbnQ9JzEnIG9mZnNldD0nMCcvPjwvZmVDb21wb25lbnRUcmFuc2Zlcj48L2ZpbHRlcj48L2RlZnM+PGltYWdlIHdpZHRoPScyNzAnIGhlaWdodD0nNTgnIGhyZWY9J2RhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBUTRBQUFBNkNBTUFBQUIyODBlWUFBQUNqbEJNVkVYLy8vOURxbm44L3Ywcm4yZ2NtRjcrLy83OS92NEtrRkZRc0lNTWtWTVpsMXdSazFiNi9mdzhwM1dUenJJU2xGZXIyY1FMa1ZJT2tsUUxrRkpjdFl1QXhhVlJzSVNYMExYNy9mejUvUHBKclg1dXZaZ01rVktQeks4V2xsb0xrRkhLNTlvbW5XWHU5L1B3K1BYKy92NHRvR3JPNmR6YzcrYTIzc3MwbzI5bnVwTmV0bzFrdVpLTXk2MmMwcmhhdElwaXVKQm11cEtpMWIxVHNZVVBrbFYzd1o3YTd1Vk1yb0NoMUx3Zm1tQTJwSEFUbEZqbDgrM2Y4ZWcrcUhiaTh1cTk0ZEE5cDNYaDhlbVkwTFlrbkdRdW9XczRwWEtnMUx4K3hLTy80dEk1cFhLeTNNanA5ZSt4M01pMTNjcG91NVNtMThEUTZ0NGhtMkYxd1o3MysvbFlzNGk1MzgzKy8vOTR3cDhlbVY5enY1dTc0TTh3b1d6My9Qb3lvbTdyOXZHV3o3UWRtVi9QNmQxQnFYankrZmFvMk1MMSt2ajUvUHVuMThFcW4yaXozY21GeUtqMisvaWQwN2tVbFZpTnk2NFFrMVdLeXF4RXEzbzNwSEdhMGJlUnpiRnZ2cG5XN09LTHlxeHB1NVdHeUtsZHRveUJ4cWJUNitBYm1GM3ordmNZbGx2ZThPZngrZlZHcTN6OC9mMk56Sy9HNWRkSHJIelM2OS93K1BUaDhlcDB3SndXbFZvVmxWbk02TnRWc29aNnc2QnR2WmMvcUhlZjFMdkU1TlhMNTlxRXg2ZS80dEhsOCt3NnBuVE42TnhOcm9IMCt2ZGZ0NDU1d3FCcXZKV0p5YXRqdVpIUjZ0NnYyOFo5eEtOYnRZdm45TzVzdkphajFiNnQyc1RiNytXbDFyL3E5dkNRemJDQ3hxWmd0NDdqOHV0eHY1cWsxcjhqbTJMbTlPMkp5cXpaN3VUcTlmREk1dGg4eEtMVjdPSk5yNEdIeWFvbm5XWjN3cDhrbkdOQXFIY3hvbTNBNHRLRnlLbFp0SWxXczRldTJzWlVzb2JDNDlSN3c2SzY0TTdHNWRiQjQ5T3cyOGR3dnBySjU5bnM5dkZKckg2YjBiajkvdjNVNitEVzdlSXFubWZvOU81UHI0S2UwN29wNndNQkFBQUdla2xFUVZSbzN1MVlaMXRVUnhRZWRtR1BDMGhmSktBWWpBaGlvUWlDYU5BZ0lxR0lpSUlGZTBORlVFRTBJTmdMTWNaWU1iRmlqVkdqRVdOdnNjWTBZb3BKL2szZW1WdDMyVHhQbm56ZzVzTzhYK2JNbVhMdnZIUE9tVFBEbUlTRWhJU0VoSVNFaElTRWhJU0VoSVNFaE1SL3c5aVFNa1hZK0NMQnBONVljVm1YajMyMzFyVWk2L2RLejZFRGx0ZTU3bGUvNjZGOSs4SytCVVp0VE1ISjB0U1VsSTZNdENQZFBqMjFQY2gxK01BdXY1NWY5TTArUUhGRk83djVGenNEOGJUV0VMS0thSU9RZkdqMFpyMi9yWjZtdENsaVF1cG9FcWdhSG1XZThyTnBZWXIrdllzRFRlcDJhQU0rMXF2TnBNRVpPY2g5SC9iRktnMzJvTms5VGNlazdGamY3SmFJVWpiWm4vbU15czZlck9wcld2RS9mYitBNUFqUWVCR0xncnFMQzM3OUF2UUZVZjVOdlVOZ2VWOURIMzNlK05KQ3JwaW1WM3NadmNoNTFtYjArNlhXYUtncTYzSDdpSnpKbUVxSHNXb1dJbjduTUJmM0VpM1R0em1KeUhjcEora0QzaDZibVRwa2NEZ0UveTdOenU5eC9meklwT1JsWElqVDdXb3o3MFlCQTB4MFpMb0tDazVFak9MNmM3cDlQZVRWMnVpaHgvTkRJZXhwdDRTTzlOaGcwQkhjMnFwdDB3akZYTG43WG9Ud3ZXWTBtNGhpdU9DQ3NuUGlWQzZPVE9rUGp0UklNUVQ2Q1NYYlJLekloQnl2ZWhaclV2WjdwWW1PSUNGRWhjUkJ2MXRWWDRIc08zNEpGM012d000K1dtY0ZIWm1UTWtESHVaSVNOWHpOVFNjYWpEKzd6VGRjbzBBMW1oMG9ienVKRnM0MXg1bWRZbVExMnAvVnFHcS8xZUNwVksxTXdJU2RSR3U2MFlISTYwTVUva1NJditHNzJYcHNUVVJ3S3JSWjVpd2pzckxVelJoUDFIOEJJdHBQWmdkUmpNYk9IV2VOYWQrQkxMQ1F5QVBIQXl3NDBORGZJUXAyQ09rUWVtd3ZSempLN1U0SGE0dEgzQlhTUzZKSHhjYjRIOEhuNUo2bG83U0pzWmxuV1ZFaGE3YmI3V21LOGpIL3Z3NmlHWHh0NzJNcHkzV2orUkpsQ3pSdVhuMlVxQmVLRXFJdzg2a2NtRU5YRldrM0F1YTFRUmkyMmdzZGJCd2ErUEV5RnU1eHhqeHZCSXpRK3B3akFYRnZudmhKdnVlMlBLSUl6V2lJSHlLcmNaaTREWmlGS0ZrajdDalpUYjh0Vi9HK0tBVE0xNHg5UXpUSEd4ME1qdmtVUlFQUkc0ZDVQSXlxNzJYTDZWaUJYYjdGYlBEMVpsNzlCRGIvRGhmMnEwYWRURlRnTm1CcE1CRnlpbnlpaVY0bnJBQ1BXWXg5amFKTXA2T2YwWTR2UEVkeDBvaFNDZ2JPSnhwbk5SdCs4WXJ0WnhDTjNvSnlsN0lZMVdoRVp1YTViRVRLU1l6QkJyNzFPdU5WaGRCY0hKN1R2ZEV4bkdpL0Vwcld1Zy9NSWJwa05SMWRXUDVpbEF0UWZxN2FNa3lkSFliUkZIdW5vMHFqNDZDM0NSZlZxdTZHRU54cDgwNUhqbGM2WUkvWHJhYmpLNXozNHVpSHIyZnlzZzZCOEFpclZJMkdzV2RFTHJjUmdYQ1dRNHpWRTZWNW0vQTZDYmJFc2xYamQ2ZmpGZEZlRk1qdEd0M3RGQVRQc3BpTndCbElwWVp4d0FxY1k2QzVob2kvWFRjYXhrNFJmZW8yQkxuN3FtT01wYXJCeGhOSXlKenpoZ09Jd1RUVUN4MzVTZ2FNVUIxdnZ1Y3duRVdoeFJiVGtVaG1YT0dxblVUMXdtaU9pUjZueVNOSVlISDNVTHdnU2pkZlpHMTE1YmRRM0hDYUo0eXQ2VWJIRXhMR3hkNE4xWTUwSStia1dPMHJ1R3p1NmEwQWdiMlFxdzd3eEFCRzAySGN4Nm9XR1NONE1scUU4aTBjeWRHbTYrMVRvaVFVYTlIYzZpdmdEekZFcGFOT0R5MVZtclZCRy9lemFXUEMvOEg3ZWhCYmtCcG5xUEpLL0QxUFZOdHdmUzBrdzQ4UFlodTM2dGV4RXJUNkNDTlBRNS9qK3JWOEhucWRRRm1vM241NHhnOCtScWdMWDY5OThMVStjMWtZaU5HOVk5d2VwT3hSRnRQQmw2Uzkwd3dJVURPTVpHSG5uZHRNaVFMRkxSYjUrSWNYc0dwL0pSbjFtd2I5NEFxUlN0MTlEbmtaT0x0TFNpNHJnR2laUHRkTWg2UElUa2E2d1RPVEtSTUZvVGQydzhkcWQxbnRLOUZHNnNnWWx2ZUFMNjVJMEpGaFJJVVVYdmQ5R1pQYW13ZUdXTzE4WGJLVDZ4OGxONmJ3R3lEbDhSZVRzN2dBamRRRy9nRHRlSVdPby9lYm1qWjA1UEYrZTdXTGpsOGpyL3BIeGlROTV2TUdWMWpOeG15blljYU1uY0UvdFhDdEw0VCtwNDF1anZ0aFJuU2MwMklNandrMzlGdkY1VFRlSEE4ZHVNNXY5WGorQ1MwM1BLSXl5UFNzWkQ5a2VZSmVtVU9iak9mTDJYRTBYMXhkcThQMGhGTEZ1aUdybEo5KzQvNkl0K05QOVNDcHIxYnVINzJKR294bUY4ekM3WEV3UEhxSCs0VnBhTERTa0RlczVuL3dacnl4YUt5cGR2NlNXaHVaMW0ycjJvcE9QYnpUTU1qaHFmOGpaRVdHNjREK1lKZ1FzOTMwYUxGa2VoSy81Qjg1a1pKeXZEbjVYR1BENXU1SmJPTDY2YS82ZFAwcTMrOGxKQ1FrSkNRa0pDUWtKQ1FrSkNRa0pDVCtEZjRHTkRVNFJTMXZEc0FBQUFBQVNVVk9SSzVDWUlJPScgZmlsdGVyPSd1cmwoI2spJy8+PC9zdmc+");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: contain;
+	pointer-events: none;
+}
+
+/* Parent page hero image dimming */
+body.wp-night-mode-on header.entry-header.entry-hero .post-thumbnail img {
+	opacity: 0.25 !important;
+}
+
+/* Dark mode: keep the hero text gradient overlay (no solid fill) */
+body.wp-night-mode-on #content > header > div.entry-header-wrapper {
+	background-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 0.7)) !important;
+	background-color: transparent !important;
+}
+
+/* Dark mode: remove opaque fill from entry header inner wrapper */
+body.wp-night-mode-on #content > header > div.entry-header-wrapper > div {
+	background: transparent !important;
+	background-color: transparent !important;
+}
+
+/* Night mode plugin sets background on every element; clear it for header text subtree */
+body.wp-night-mode-on #content > header > div.entry-header-wrapper > div *,
+body.wp-night-mode-on #content > header > div.entry-header-wrapper > div *::before,
+body.wp-night-mode-on #content > header > div.entry-header-wrapper > div *::after {
+	background-color: transparent !important;
+}
+
+/* Dark mode: soften sidebar horizontal separators and header menu dividers */
+body.wp-night-mode-on .entry-footer hr {
+	border-color: rgb(255 255 255 / 0.5) !important;
+}
+
+body.wp-night-mode-on .entry-footer .byline,
+body.wp-night-mode-on .entry-footer .cat-links,
+body.wp-night-mode-on .entry-footer .comments-link,
+body.wp-night-mode-on .entry-footer .edit-link,
+body.wp-night-mode-on .entry-footer .posted-on,
+body.wp-night-mode-on .entry-footer .tags-links,
+body.wp-night-mode-on .entry-footer > span:last-of-type {
+	border-top-color: rgb(255 255 255 / 0.5) !important;
+	border-bottom-color: rgb(255 255 255 / 0.5) !important;
+}
+
+body.wp-night-mode-on .main-navigation .nav-menu > li + li {
+	border-left-color: rgb(255 255 255 / 0.5) !important;
+}
+
+body.wp-night-mode-on.rtl .main-navigation .nav-menu > li + li {
+	border-right-color: rgb(255 255 255 / 0.5) !important;
+	border-left-color: transparent !important;
+}
+
+body.wp-night-mode-on .site-branding:before {
+	background-color: rgb(255 255 255 / 0.5) !important;
+}
+
+body.wp-night-mode-on #content div.sharedaddy h3.sd-title:before,
+body.wp-night-mode-on .sd-like.jetpack-likes-widget-wrapper,
+body.wp-night-mode-on #post-515870 > footer > div.sharedaddy.sd-sharing-enabled,
+body.wp-night-mode-on [id^="like-post-wrapper-"],
+body.wp-night-mode-on [id^="like-post-wrapper-"] .sd-box {
+	border-top-color: rgb(255 255 255 / 0.5) !important;
+	border-bottom-color: rgb(255 255 255 / 0.5) !important;
+}
+
+/* Cleaning up the look of the post header */
+
+a.time-ago.icon.icon-clock::before {
+	display: none;
+}
+
+/* Moves timestamp up next to byline */
+span.post-meta {
+	display: inline-block;
+	padding-top: 1px;
+}
+
+/* Removes follow user icon */
+span.follow-user {
+	display: none;
+}
+
+/* Reduces font size of usernames */
+.post-byline {
+	font-size: 15px;
+}
+
+/* Removes unnecessary headroom from comment headers */
+header.comment__header {
+	margin-top: 0;
+}
+
+/* Align avatar with username/badges */
+.post div.avatar {
+	margin-top: 3px;
+}
+
+/* Legacy avatar sizing rules (kept for reference)
+.post-content .user {
+	height: var(--disqus-avatar-size-parent);
+	width: var(--disqus-avatar-size-parent);
+}
+ul[data-role="children"] .user {
+	height: var(--disqus-avatar-size-child) !important;
+	width: var(--disqus-avatar-size-child) !important;
+}
+*/
+
+/* Matches indicator height to top-level avatar */
+.indicator {
+	height: var(--disqus-avatar-size-parent) !important;
+	margin-top: 3px !important;
+}
+
+/* Matches indicator height to reply avatar */
+ul[data-role="children"] .indicator {
+	height: var(--disqus-avatar-size-child) !important;
+	margin-top: 3px !important;
+}
+
+/* Reduces roundedness of avatar corners */
+.post-content .user {
+	border-radius: var(--disqus-radius-md) !important;
+}
+
+/* Compressing overall verticality of page */
+div.post-content {
+	margin-bottom: 16px;
+}
+
+/* Removes whitespace below oldest/newest/first */
+.nav-secondary-refresh {
+	margin-bottom: 0;
+}
+
+/* Returns featured comment to being ABOVE the new post box */
+
+#posts {
+	display: flex;
+	flex-direction: column;
+}
+
+#highlighted-post {
+	order: -1;
+}
+
+/* Avatar size for parent posts */
+.embed-refresh-v2 li.post > .post-content .avatar .user--refresh {
+	width: var(--disqus-avatar-size-parent);
+	height: var(--disqus-avatar-size-parent);
+}
+
+/* Avatar size for child posts */
+.embed-refresh-v2 .children li.post > .post-content .avatar .user--refresh {
+	width: var(--disqus-avatar-size-child);
+	height: var(--disqus-avatar-size-child);
+}
+
+/* Avatar next to desktop editor field */
+#form .compose-wrapper > .avatar .user--refresh {
+	width: var(--disqus-avatar-size-parent) !important;
+	height: var(--disqus-avatar-size-parent) !important;
+	border-radius: var(--disqus-radius-md) !important;
+}
+
+/* Remove share link in comment footer */
+.comment__share .toggle {
+	display: none !important;
+}
+
+/* Set height of realtime reply indicators */
+.post-content > .post-body > footer > menu > li.realtime > a > span {
+	height: 14px !important;
+	margin-top: 0 !important;
+}
+
+.realtime-button.reveal {
+	padding-bottom: 6px;
+}
+
+/* User badge stuff for mobile */
+
+.mobile .user-badge.truncate-badge.publisher-background-color {
+	width: 18px !important;
+	height: 18px !important;
+}
+
+.mobile .user-badges-collection {
+	display: inline-flex !important;
+	gap: 1px !important;
+}
+
+/* Hide the default dropdown toggle icon */
+.post-menu .dropdown-toggle-icon {
+	display: none !important;
+}
+
+/* Style caret color and size */
+.post-menu .dropdown-toggle::after {
+	content: "";
+	display: inline-block;
+	margin-left: 6px;
+	vertical-align: -5px;
+	border-top: 8px solid currentColor;
+	border-right: 6px solid transparent;
+	border-left: 6px solid transparent;
+	width: 0;
+	height: 0;
+	color: #92959a;
+}
+
+/* **** Profile hover card **** */
+
+div[data-role="post-content"] .embed-refresh-v2 .avatar .user--refresh {
+	width: var(--disqus-avatar-size-parent) !important;
+	height: var(--disqus-avatar-size-parent) !important;
+}
+
+/* Outer visible card (rounded corners) */
+.tooltip-outer.profile-card .tooltip {
+	border: 2px solid #687a86 !important;
+	border-radius: var(--disqus-radius-md) !important;
+	overflow: hidden !important;
+	margin-top: -4px !important;
+}
+
+/* Override Disqus’ pesky !important declaration of min width/height for the hovercard avatar */
+.tooltip .avatar--refresh-v2 > img[data-role="user-avatar"] {
+	min-width: 0 !important;
+	min-height: 0 !important;
+}
+
+/* Avatar corner radius to 6px */
+.avatar--refresh-v2 img {
+	border-radius: var(--disqus-radius-md) !important;
+	width: var(--disqus-avatar-size-parent) !important;
+	height: var(--disqus-avatar-size-parent) !important;
+}
+
+/* Remove additional letterspacing */
+a[data-role="username"],
+.tooltip__bio p {
+	letter-spacing: normal !important;
+}
+
+/* Remove borders from "Edit", "View Profile", and "Private Profile" buttons */
+.hovercard-actions-container a,
+.hovercard-actions-container .btn.private {
+	border: none !important;
+}
+
+/* Remove eye icon from "View Profile" button */
+.view-profile .eye {
+	display: none !important;
+}
+
+/* Set dark gray color for comment and like icons in the profile card */
+.tooltip__content p.stats .count.comment,
+.tooltip__content p.stats .count.like {
+	background-color: #666 !important;
+}
+
+.tooltip__content p.stats--refresh-v2 .counters {
+	font-weight: inherit !important;
+	color: #666 !important;
+}
+
+/* Adjust overall padding inside the profile hovercard */
+.tooltip.tooltip-v2.tooltip--refresh--v2 {
+	padding: 0;
+}
+
+/* Remove all spacing from profile card footer and its contents */
+.tooltip__footer-v2,
+.tooltip__footer-v2 * {
+	margin: 0 !important;
+	padding: 0 !important;
+	align-items: center !important;
+	justify-content: center !important;
+}
+
+.tooltip__footer-v2 {
+	border-top: 2px solid #687a86 !important;
+	background: none !important;
+}
+
+.tooltip-outer.profile-card--refresh .tooltip__footer-v2 .hovercard-actions-container .follow-btn.private {
+	background: none !important;
+}
+
+.profile-card--refresh .tooltip-v2 .tooltip__header {
+	margin: 6px !important;
+	height: auto !important;
+	margin-bottom: 8px !important;
+}
+
+.tooltip__bio {
+	padding: 5px 12px 0 12px !important;
+	font-size: 12px;
+	line-height: 16px;
+	letter-spacing: 0;
+}
+
+.tooltip__content--refresh-v2 {
+	padding-bottom: 2px !important;
+}
+
+.tooltip__content {
+	min-height: 54px !important;
+}
+
+.tooltip__footer-v2 .hovercard-actions-container {
+	width: 100% !important;
+	height: 36px;
+	margin: 0 !important;
+}
+
+.tooltip__footer-v2 .hovercard-actions-container a {
+	width: 50% !important;
+}
+
+.tooltip__footer-v2 .hovercard-actions-container a span {
+	margin: 0 !important;
+}
+
+.tooltip__footer-v2 .hovercard-actions-container .follow-btn .follow-text {
+	margin-top: 0 !important;
+}
+
+/* Unify footer buttons and vertically center their text */
+.tooltip-outer.profile-card .tooltip__footer-v2 .hovercard-actions-container a {
+	font-size: 14px !important;
+	font-weight: 600 !important;
+	letter-spacing: normal !important;
+	color: var(--disqus-accent) !important;
+	background: none !important;
+}
+
+.tooltip__footer-v2 .hovercard-actions-container .follow-btn,
+.tooltip__footer-v2 .hovercard-actions-container .view-profile,
+.tooltip__footer-v2 .hovercard-actions-container .follow-btn.private {
+	height: inherit !important;
+	bottom: 0 !important;
+	font-weight: 600 !important;
+}
+
+.tooltip__footer-v2 .hovercard-actions-container .follow-btn.private {
+	width: 100% !important;
+}
+
+.follow-btn.private .icon-lock {
+	padding-right: 4px !important;
+}
+
+.tooltip__footer-v2 .follow-btn.private a {
+	padding-bottom: 2px !important;
+}
+
+.tooltip__footer-v2 .hovercard-actions-container span {
+	border-radius: 0 !important;
+	background-color: transparent !important;
+	border: none !important;
+}
+
+/* **** Voting **** */
+
+/* Caret SVG masks */
+
+.embed-refresh .post-votes .vote-up .control {
+	-webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 7" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,3 8,6"/></svg>') !important;
+	mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 7" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,3 8,6"/></svg>') !important;
+}
+
+.embed-refresh .post-votes .vote-down .control {
+	-webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 7" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,3 5,6 8,3"/></svg>') !important;
+	mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 7" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,3 5,6 8,3"/></svg>') !important;
+}
+
+/* Vote color changes on selection */
+
+.post-votes .vote-up.upvoted .count {
+	color: #2e9fff !important;
+}
+.post-votes .vote-up.upvoted .control {
+	background-color: #2e9fff !important;
+}
+.post-votes .vote-down.downvoted .control {
+	background-color: #ff0000 !important;
+}
+
+/* Remove voting button borders */
+
+.vote-up:hover,
+.vote-down:hover,
+.vote-up.voted,
+.vote-down.voted,
+.vote-up[data-action="upvote"],
+.vote-down[data-action="downvote"] {
+	border-color: transparent !important;
+}
+
+/* Voter menu */
+
+.tooltip.voters.tooltip--post-refresh {
+	border-radius: var(--disqus-radius-sm) !important;
+}
+
+.tooltip.voters .username--refresh {
+	font-size: 14px !important;
+	letter-spacing: 0 !important;
+	display: block !important;
+	overflow: hidden !important;
+	white-space: nowrap !important;
+	text-overflow: ellipsis !important;
+	flex: 1 1 auto !important;
+	min-width: 0;
+}
+
+.tooltip.voters .avatar--refresh img {
+	border-radius: var(--disqus-radius-sm) !important;
+}
+
+.tooltip.voters .username--refresh:hover {
+	color: var(--disqus-accent) !important;
+}
+
+.voters-outer .tooltip.voters {
+	width: 300px !important;
+}
+
+.tooltip.voters .user {
+	display: flex !important;
+	align-items: center;
+	gap: 8px;
+	width: 100% !important;
+}
+
+.tooltip-outer.voters-outer--refresh .tooltip-wrapper--tl,
+.tooltip-outer.voters-outer--refresh .tooltip-wrapper--bl {
+	border-radius: var(--disqus-radius-sm) !important;
+}
+
+/* Dark mode: Disqus profile + voters popovers */
+body.wp-theme-gazette.wp-night-mode-on .tooltip-outer.profile-card .tooltip,
+body.wp-theme-gazette.wp-night-mode-on .tooltip.voters.tooltip--post-refresh,
+body.wp-theme-gazette.wp-night-mode-on .voters-outer .tooltip.voters,
+html[data-theme="dark"] body.roboto .tooltip-outer.profile-card .tooltip,
+body.roboto[data-theme="dark"] .tooltip-outer.profile-card .tooltip,
+html[data-color-scheme="dark"] body.roboto .tooltip-outer.profile-card .tooltip,
+body.roboto[data-color-scheme="dark"] .tooltip-outer.profile-card .tooltip,
+body.roboto.dark .tooltip-outer.profile-card .tooltip,
+body.roboto.theme-dark .tooltip-outer.profile-card .tooltip,
+html[data-theme="dark"] body.roboto .tooltip.voters.tooltip--post-refresh,
+html[data-theme="dark"] body.roboto .voters-outer .tooltip.voters,
+body.roboto[data-theme="dark"] .tooltip.voters.tooltip--post-refresh,
+body.roboto[data-theme="dark"] .voters-outer .tooltip.voters,
+html[data-color-scheme="dark"] body.roboto .tooltip.voters.tooltip--post-refresh,
+html[data-color-scheme="dark"] body.roboto .voters-outer .tooltip.voters,
+body.roboto[data-color-scheme="dark"] .tooltip.voters.tooltip--post-refresh,
+body.roboto[data-color-scheme="dark"] .voters-outer .tooltip.voters,
+body.roboto.dark .tooltip.voters.tooltip--post-refresh,
+body.roboto.dark .voters-outer .tooltip.voters,
+body.roboto.theme-dark .tooltip.voters.tooltip--post-refresh,
+body.roboto.theme-dark .voters-outer .tooltip.voters {
+	background-color: #191919 !important;
+	border-color: #687a86 !important;
+}
+
+body.wp-theme-gazette.wp-night-mode-on .tooltip-outer.profile-card .tooltip .tooltip__header,
+body.wp-theme-gazette.wp-night-mode-on .tooltip-outer.profile-card .tooltip .tooltip__content,
+body.wp-theme-gazette.wp-night-mode-on .tooltip-outer.profile-card .tooltip .tooltip__content--refresh-v2,
+body.wp-theme-gazette.wp-night-mode-on .tooltip-outer.profile-card .tooltip .tooltip__footer-v2,
+body.wp-theme-gazette.wp-night-mode-on .tooltip.voters .user,
+html[data-theme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__header,
+html[data-theme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__content,
+html[data-theme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__content--refresh-v2,
+html[data-theme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__footer-v2,
+body.roboto[data-theme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__header,
+body.roboto[data-theme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__content,
+body.roboto[data-theme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__content--refresh-v2,
+body.roboto[data-theme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__footer-v2,
+html[data-color-scheme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__header,
+html[data-color-scheme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__content,
+html[data-color-scheme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__content--refresh-v2,
+html[data-color-scheme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__footer-v2,
+body.roboto[data-color-scheme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__header,
+body.roboto[data-color-scheme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__content,
+body.roboto[data-color-scheme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__content--refresh-v2,
+body.roboto[data-color-scheme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__footer-v2,
+body.roboto.dark .tooltip-outer.profile-card .tooltip .tooltip__header,
+body.roboto.dark .tooltip-outer.profile-card .tooltip .tooltip__content,
+body.roboto.dark .tooltip-outer.profile-card .tooltip .tooltip__content--refresh-v2,
+body.roboto.dark .tooltip-outer.profile-card .tooltip .tooltip__footer-v2,
+body.roboto.theme-dark .tooltip-outer.profile-card .tooltip .tooltip__header,
+body.roboto.theme-dark .tooltip-outer.profile-card .tooltip .tooltip__content,
+body.roboto.theme-dark .tooltip-outer.profile-card .tooltip .tooltip__content--refresh-v2,
+body.roboto.theme-dark .tooltip-outer.profile-card .tooltip .tooltip__footer-v2,
+html[data-theme="dark"] body.roboto .tooltip.voters .user,
+body.roboto[data-theme="dark"] .tooltip.voters .user,
+html[data-color-scheme="dark"] body.roboto .tooltip.voters .user,
+body.roboto[data-color-scheme="dark"] .tooltip.voters .user,
+body.roboto.dark .tooltip.voters .user,
+body.roboto.theme-dark .tooltip.voters .user {
+	background-color: #191919 !important;
+}
+
+body.wp-theme-gazette.wp-night-mode-on .tooltip-outer.profile-card .tooltip [data-role="username"],
+body.wp-theme-gazette.wp-night-mode-on .tooltip-outer.profile-card .tooltip .tooltip__bio,
+body.wp-theme-gazette.wp-night-mode-on .tooltip-outer.profile-card .tooltip .tooltip__bio p,
+body.wp-theme-gazette.wp-night-mode-on .tooltip-outer.profile-card .tooltip .tooltip__content p,
+body.wp-theme-gazette.wp-night-mode-on .tooltip-outer.profile-card .tooltip .tooltip__content .counters,
+body.wp-theme-gazette.wp-night-mode-on .tooltip.voters .user,
+body.wp-theme-gazette.wp-night-mode-on .tooltip.voters .username--refresh,
+html[data-theme="dark"] body.roboto .tooltip-outer.profile-card .tooltip [data-role="username"],
+html[data-theme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__bio,
+html[data-theme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__bio p,
+html[data-theme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__content p,
+html[data-theme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__content .counters,
+body.roboto[data-theme="dark"] .tooltip-outer.profile-card .tooltip [data-role="username"],
+body.roboto[data-theme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__bio,
+body.roboto[data-theme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__bio p,
+body.roboto[data-theme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__content p,
+body.roboto[data-theme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__content .counters,
+html[data-color-scheme="dark"] body.roboto .tooltip-outer.profile-card .tooltip [data-role="username"],
+html[data-color-scheme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__bio,
+html[data-color-scheme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__bio p,
+html[data-color-scheme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__content p,
+html[data-color-scheme="dark"] body.roboto .tooltip-outer.profile-card .tooltip .tooltip__content .counters,
+body.roboto[data-color-scheme="dark"] .tooltip-outer.profile-card .tooltip [data-role="username"],
+body.roboto[data-color-scheme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__bio,
+body.roboto[data-color-scheme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__bio p,
+body.roboto[data-color-scheme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__content p,
+body.roboto[data-color-scheme="dark"] .tooltip-outer.profile-card .tooltip .tooltip__content .counters,
+body.roboto.dark .tooltip-outer.profile-card .tooltip [data-role="username"],
+body.roboto.dark .tooltip-outer.profile-card .tooltip .tooltip__bio,
+body.roboto.dark .tooltip-outer.profile-card .tooltip .tooltip__bio p,
+body.roboto.dark .tooltip-outer.profile-card .tooltip .tooltip__content p,
+body.roboto.dark .tooltip-outer.profile-card .tooltip .tooltip__content .counters,
+body.roboto.theme-dark .tooltip-outer.profile-card .tooltip [data-role="username"],
+body.roboto.theme-dark .tooltip-outer.profile-card .tooltip .tooltip__bio,
+body.roboto.theme-dark .tooltip-outer.profile-card .tooltip .tooltip__bio p,
+body.roboto.theme-dark .tooltip-outer.profile-card .tooltip .tooltip__content p,
+body.roboto.theme-dark .tooltip-outer.profile-card .tooltip .tooltip__content .counters,
+html[data-theme="dark"] body.roboto .tooltip.voters .user,
+html[data-theme="dark"] body.roboto .tooltip.voters .username--refresh,
+body.roboto[data-theme="dark"] .tooltip.voters .user,
+body.roboto[data-theme="dark"] .tooltip.voters .username--refresh,
+html[data-color-scheme="dark"] body.roboto .tooltip.voters .user,
+html[data-color-scheme="dark"] body.roboto .tooltip.voters .username--refresh,
+body.roboto[data-color-scheme="dark"] .tooltip.voters .user,
+body.roboto[data-color-scheme="dark"] .tooltip.voters .username--refresh,
+body.roboto.dark .tooltip.voters .user,
+body.roboto.dark .tooltip.voters .username--refresh,
+body.roboto.theme-dark .tooltip.voters .user,
+body.roboto.theme-dark .tooltip.voters .username--refresh {
+	color: #fff !important;
+}
+
+/* Light mode reset for Disqus popovers (instant on toggle off) */
+body.wp-theme-gazette:not(.wp-night-mode-on) .tooltip-outer.profile-card .tooltip,
+body.wp-theme-gazette:not(.wp-night-mode-on) .tooltip.voters.tooltip--post-refresh,
+body.wp-theme-gazette:not(.wp-night-mode-on) .voters-outer .tooltip.voters {
+	background-color: #fff !important;
+	border-color: #ddd !important;
+}
+
+body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color-scheme="dark"]) .tooltip-outer.profile-card .tooltip,
+body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color-scheme="dark"]) .tooltip.voters.tooltip--post-refresh,
+body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color-scheme="dark"]) .voters-outer .tooltip.voters {
+	background-color: #fff !important;
+	border-color: #ddd !important;
+}
+
+body.wp-theme-gazette:not(.wp-night-mode-on) .tooltip.voters .user {
+	background-color: #fff !important;
+}
+
+body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color-scheme="dark"]) .tooltip.voters .user {
+	background-color: #fff !important;
+}
+
+body.wp-theme-gazette:not(.wp-night-mode-on) .tooltip.voters .username--refresh,
+body.wp-theme-gazette:not(.wp-night-mode-on) .tooltip-outer.profile-card .tooltip [data-role="username"],
+body.wp-theme-gazette:not(.wp-night-mode-on) .tooltip-outer.profile-card .tooltip .tooltip__bio,
+body.wp-theme-gazette:not(.wp-night-mode-on) .tooltip-outer.profile-card .tooltip .tooltip__bio p,
+body.wp-theme-gazette:not(.wp-night-mode-on) .tooltip-outer.profile-card .tooltip .tooltip__content p,
+body.wp-theme-gazette:not(.wp-night-mode-on) .tooltip-outer.profile-card .tooltip .tooltip__content .counters {
+	color: #666 !important;
+}
+
+body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color-scheme="dark"]) .tooltip.voters .username--refresh,
+body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color-scheme="dark"]) .tooltip-outer.profile-card .tooltip [data-role="username"],
+body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color-scheme="dark"]) .tooltip-outer.profile-card .tooltip .tooltip__bio,
+body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color-scheme="dark"]) .tooltip-outer.profile-card .tooltip .tooltip__bio p,
+body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color-scheme="dark"]) .tooltip-outer.profile-card .tooltip .tooltip__content p,
+body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color-scheme="dark"]) .tooltip-outer.profile-card .tooltip .tooltip__content .counters {
+	color: #666 !important;
+}
+
+/* Editor edits */
+
+._container_ylcfx_1 {
+	border-radius: var(--disqus-radius-md) !important;
+}
+
+._editor-container-expanded_ylcfx_13 {
+	border-radius: var(--disqus-radius-md) var(--disqus-radius-md) 0 0 !important;
+	padding: 12px;
+}
+
+._toolbar_k0g7a_47 {
+	padding: 5px 9px 5px 5px;
+}
+
+._submit_k0g7a_84 {
+	border-radius: var(--disqus-radius-md) !important;
+}
+
+/* .avatar .image-refresh.image-refresh.image-refresh.image-refresh.image-refresh.image-refresh,
+.mobile .avatar .image-refresh.image-refresh.image-refresh.image-refresh.image-refresh.image-refresh {
+	border-radius: 6px !important;
+	width: 40px !important;
+	height: 40px !important;
+}*/
+
+.children .post .avatar .user img {
+	width: 40px !important;
+	height: 40px !important;
+}
+
+/* Blues */
+
+/* Realtime reply color chip */
+
+.realtime-button .indicator--refresh {
+	background: var(--disqus-accent) !important;
+}
+
+.edit-time-left a.edit-time-message {
+	color: var(--disqus-accent) !important;
+}
+
+/* Unified button styling */
+
+#posts > button,
+#posts > div.load-more-refresh.load-more-refresh--v2 > a {
+	border-radius: var(--disqus-radius-sm) !important;
+	color: white !important;
+	background-color: var(--disqus-accent) !important;
+	border: none !important;
+	font-size: 15px !important;
+}
+
+/* Sorting tab: selected state themed */
+
+.sort-menu-refresh__item.selected > a {
+	color: var(--disqus-accent) !important;
+	border-bottom: 4px solid var(--disqus-accent) !important;
+}
+
+.sort-menu-refresh__item,
+.sort-menu-refresh__item a {
+	padding-bottom: 2px;
+}
+
+/* Toolbar button styling */
+
+._toolbar_k0g7a_47 ._actions_k0g7a_78 > button {
+	border-radius: 8px !important;
+	background-color: var(--disqus-accent) !important;
+	margin-right: 4px !important;
+}
+
+.post-content.new .indicator,
+.post-content.target .indicator {
+	background: var(--disqus-accent) !important;
+}
+
+button._cancel_k0g7a_126 {
+	color: #fff !important;
+}
+
+/* Main user menu */
+
+.dropdown-menu.dropdown-menu--refresh {
+	border-radius: var(--disqus-radius-sm) !important;
+}
+
+.dropdown-menu.dropdown-menu--refresh li a {
+	font-size: 14px !important;     /* adjust font size */
+	padding-top: 4px !important;    /* adjust vertical spacing */
+	padding-bottom: 4px !important;
+	/* line-height: 1.4 !important; optional fine-tuning */
+}
+
+.dropdown-menu.dropdown-menu--refresh li a:hover {
+	color: var(--disqus-accent) !important;
+}
+
+/* Mod badge styling */
+
+.badge.moderator .badge-content {
+	background-color: #b5bbc1 !important;
+}
+
+/* Pinned post styling */
+
+.pinned-icon {
+	visibility: hidden !important;
+}

@@ -209,16 +209,6 @@ header.comment__header {
 	margin-top: 3px;
 }
 
-/* Legacy avatar sizing rules (kept for reference)
-.post-content .user {
-	height: var(--disqus-avatar-size-parent);
-	width: var(--disqus-avatar-size-parent);
-}
-ul[data-role="children"] .user {
-	height: var(--disqus-avatar-size-child) !important;
-	width: var(--disqus-avatar-size-child) !important;
-}
-*/
 
 /* Matches indicator height to top-level avatar */
 .indicator {

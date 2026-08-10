@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.4
+@version     3.5
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -333,11 +333,6 @@ div[data-role="post-content"] .embed-refresh-v2 .avatar .user--refresh {
 	border-radius: var(--disqus-radius-md) !important;
 	overflow: hidden !important;
 	margin-top: -4px !important;
-}
-
-/* Nudge the card left so its avatar lines up horizontally with the hovered avatar */
-.tooltip-outer.profile-card {
-	margin-left: -22px !important;
 }
 
 /* Override Disqus’ pesky !important declaration of min width/height for the hovercard avatar */

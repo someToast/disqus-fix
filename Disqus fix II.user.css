@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.6
+@version     3.7
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -181,7 +181,21 @@ body.wp-night-mode-on [id^="like-post-wrapper-"] iframe {
 body.wp-night-mode-on .sd-content a.sd-button.share-email {
 	background: #191919 !important;
 	color: var(--disqus-text-on-dark) !important;
-	border: 1px solid rgb(255 255 255 / 0.3) !important;
+	border: 1px solid rgb(255 255 255 / 0.25) !important;
+}
+
+/* Dark mode: dim the theme's bright default (#ddd/#efefef) borders on boxes,
+   the search control, the long vertical content rule, and the footer/subscribe
+   blocks to match the hairline treatment */
+body.wp-night-mode-on .site-header,
+body.wp-night-mode-on .site-main,
+body.wp-night-mode-on .site-footer,
+body.wp-night-mode-on .search-toggle,
+body.wp-night-mode-on #jp-relatedposts,
+body.wp-night-mode-on .sharedaddy.sd-sharing-enabled,
+body.wp-night-mode-on .wp-block-group.has-border-color,
+body.wp-night-mode-on #subscribe-field {
+	border-color: rgb(255 255 255 / 0.25) !important;
 }
 
 /* Cleaning up the look of the post header */

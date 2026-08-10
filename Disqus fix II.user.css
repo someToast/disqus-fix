@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.5
+@version     3.6
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -13,7 +13,7 @@
 	--disqus-radius-md: 6px;
 	--disqus-avatar-size-parent: 50px;
 	--disqus-avatar-size-child: 40px;
-	--disqus-text-on-dark: #fff;
+	--disqus-text-on-dark: #d7d7d7;
 	--parent-dark-bg: #111;
 	/* Dark-mode image keying (smart-invert): flips white backgrounds to the page
 	   color while roughly preserving hue. --dark-invert is the base; the logo
@@ -135,7 +135,7 @@ body.wp-night-mode-on #content > header > div.entry-header-wrapper > div *::afte
 
 /* Dark mode: soften sidebar horizontal separators and header menu dividers */
 body.wp-night-mode-on .entry-footer hr {
-	border-color: rgb(255 255 255 / 0.5) !important;
+	border-color: rgb(255 255 255 / 0.25) !important;
 }
 
 body.wp-night-mode-on .entry-footer .byline,
@@ -145,21 +145,21 @@ body.wp-night-mode-on .entry-footer .edit-link,
 body.wp-night-mode-on .entry-footer .posted-on,
 body.wp-night-mode-on .entry-footer .tags-links,
 body.wp-night-mode-on .entry-footer > span:last-of-type {
-	border-top-color: rgb(255 255 255 / 0.5) !important;
-	border-bottom-color: rgb(255 255 255 / 0.5) !important;
+	border-top-color: rgb(255 255 255 / 0.25) !important;
+	border-bottom-color: rgb(255 255 255 / 0.25) !important;
 }
 
 body.wp-night-mode-on .main-navigation .nav-menu > li + li {
-	border-left-color: rgb(255 255 255 / 0.5) !important;
+	border-left-color: rgb(255 255 255 / 0.25) !important;
 }
 
 body.wp-night-mode-on.rtl .main-navigation .nav-menu > li + li {
-	border-right-color: rgb(255 255 255 / 0.5) !important;
+	border-right-color: rgb(255 255 255 / 0.25) !important;
 	border-left-color: transparent !important;
 }
 
 body.wp-night-mode-on .site-branding:before {
-	background-color: rgb(255 255 255 / 0.5) !important;
+	background-color: rgb(255 255 255 / 0.25) !important;
 }
 
 body.wp-night-mode-on #content div.sharedaddy h3.sd-title:before,
@@ -167,8 +167,8 @@ body.wp-night-mode-on .sd-like.jetpack-likes-widget-wrapper,
 body.wp-night-mode-on #post-515870 > footer > div.sharedaddy.sd-sharing-enabled,
 body.wp-night-mode-on [id^="like-post-wrapper-"],
 body.wp-night-mode-on [id^="like-post-wrapper-"] .sd-box {
-	border-top-color: rgb(255 255 255 / 0.5) !important;
-	border-bottom-color: rgb(255 255 255 / 0.5) !important;
+	border-top-color: rgb(255 255 255 / 0.25) !important;
+	border-bottom-color: rgb(255 255 255 / 0.25) !important;
 }
 
 /* Jetpack Likes renders in a cross-origin iframe with a white background we
@@ -664,7 +664,7 @@ body.roboto.dark .tooltip.voters .user,
 body.roboto.dark .tooltip.voters .username--refresh,
 body.roboto.theme-dark .tooltip.voters .user,
 body.roboto.theme-dark .tooltip.voters .username--refresh {
-	color: #fff !important;
+	color: var(--disqus-text-on-dark) !important;
 }
 
 /* Light mode reset for Disqus popovers (instant on toggle off) */

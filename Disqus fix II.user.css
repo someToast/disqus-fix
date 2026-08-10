@@ -15,9 +15,11 @@
 	--disqus-avatar-size-child: 40px;
 	--disqus-text-on-dark: #fff;
 	--parent-dark-bg: #111;
-	/* Dark-mode image keying: flips white backgrounds to the page color while
-	   keeping the green wordmark (smart-invert). Used for the header logo and masthead. */
-	--dark-logo-filter: invert(0.9) hue-rotate(180deg) saturate(1.8);
+	/* Dark-mode image keying (smart-invert): flips white backgrounds to the page
+	   color while roughly preserving hue. --dark-invert is the base; the logo
+	   variant adds saturation to keep the green wordmark punchy. */
+	--dark-invert: invert(0.9) hue-rotate(180deg);
+	--dark-logo-filter: var(--dark-invert) saturate(1.8);
 }
 
 body.roboto,
@@ -167,6 +169,19 @@ body.wp-night-mode-on [id^="like-post-wrapper-"],
 body.wp-night-mode-on [id^="like-post-wrapper-"] .sd-box {
 	border-top-color: rgb(255 255 255 / 0.5) !important;
 	border-bottom-color: rgb(255 255 255 / 0.5) !important;
+}
+
+/* Jetpack Likes renders in a cross-origin iframe with a white background we
+   can't style directly; smart-invert keys it to the dark page. */
+body.wp-night-mode-on [id^="like-post-wrapper-"] iframe {
+	filter: var(--dark-invert);
+}
+
+/* Jetpack "Email" share button ships with a white background */
+body.wp-night-mode-on .sd-content a.sd-button.share-email {
+	background: #191919 !important;
+	color: var(--disqus-text-on-dark) !important;
+	border: 1px solid rgb(255 255 255 / 0.3) !important;
 }
 
 /* Cleaning up the look of the post header */

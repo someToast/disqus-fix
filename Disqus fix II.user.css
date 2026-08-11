@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.7
+@version     3.8
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -196,6 +196,16 @@ body.wp-night-mode-on .sharedaddy.sd-sharing-enabled,
 body.wp-night-mode-on .wp-block-group.has-border-color,
 body.wp-night-mode-on #subscribe-field {
 	border-color: rgb(255 255 255 / 0.25) !important;
+}
+
+/* Dark mode: Disqus realtime "N new comments above/below" banners render in
+   same-origin iframes our userstyle can't inject into, so invert the iframe
+   element (light-gray banner -> dark bg, light text). translateZ forces a
+   compositing layer so the filter also renders on the bottom-pinned banner. */
+body.wp-night-mode-on #indicator-north,
+body.wp-night-mode-on #indicator-south {
+	filter: invert(1) !important;
+	transform: translateZ(0) !important;
 }
 
 /* Cleaning up the look of the post header */

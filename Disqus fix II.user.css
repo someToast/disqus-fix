@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.15
+@version     3.16
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -294,7 +294,6 @@ img[title]:not([title=""]) {
 }
 
 /* Cleaning up the look of the post header */
-
 a.time-ago.icon.icon-clock::before {
 	display: none;
 }
@@ -325,7 +324,6 @@ header.comment__header {
 	margin-top: 3px;
 }
 
-
 /* Matches indicator height to top-level avatar */
 .indicator {
 	height: var(--disqus-avatar-size-parent) !important;
@@ -354,7 +352,6 @@ div.post-content {
 }
 
 /* Returns featured comment to being ABOVE the new post box */
-
 #posts {
 	display: flex;
 	flex-direction: column;
@@ -399,7 +396,6 @@ div.post-content {
 }
 
 /* User badge stuff for mobile */
-
 .mobile .user-badge.truncate-badge.publisher-background-color {
 	width: 18px !important;
 	height: 18px !important;
@@ -430,7 +426,6 @@ div.post-content {
 }
 
 /* **** Profile hover card **** */
-
 div[data-role="post-content"] .embed-refresh-v2 .avatar .user--refresh {
 	width: var(--disqus-avatar-size-parent) !important;
 	height: var(--disqus-avatar-size-parent) !important;
@@ -583,9 +578,7 @@ a[data-role="username"],
 }
 
 /* **** Voting **** */
-
 /* Caret SVG masks */
-
 .embed-refresh .post-votes .vote-up .control {
 	-webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 7" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,3 8,6"/></svg>') !important;
 	mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 7" fill="none" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,3 8,6"/></svg>') !important;
@@ -597,19 +590,19 @@ a[data-role="username"],
 }
 
 /* Vote color changes on selection */
-
 .post-votes .vote-up.upvoted .count {
 	color: #2e9fff !important;
 }
+
 .post-votes .vote-up.upvoted .control {
 	background-color: #2e9fff !important;
 }
+
 .post-votes .vote-down.downvoted .control {
 	background-color: #ff0000 !important;
 }
 
 /* Remove voting button borders */
-
 .vote-up:hover,
 .vote-down:hover,
 .vote-up.voted,
@@ -620,7 +613,6 @@ a[data-role="username"],
 }
 
 /* Voter menu */
-
 .tooltip.voters.tooltip--post-refresh {
 	border-radius: var(--disqus-radius-sm) !important;
 }
@@ -818,7 +810,6 @@ body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color
 }
 
 /* Editor edits */
-
 ._container_ylcfx_1 {
 	border-radius: var(--disqus-radius-md) !important;
 }
@@ -836,22 +827,13 @@ body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color
 	border-radius: var(--disqus-radius-md) !important;
 }
 
-/* .avatar .image-refresh.image-refresh.image-refresh.image-refresh.image-refresh.image-refresh,
-.mobile .avatar .image-refresh.image-refresh.image-refresh.image-refresh.image-refresh.image-refresh {
-	border-radius: 6px !important;
-	width: 40px !important;
-	height: 40px !important;
-}*/
-
 .children .post .avatar .user img {
 	width: 40px !important;
 	height: 40px !important;
 }
 
 /* Blues */
-
 /* Realtime reply color chip */
-
 .realtime-button .indicator--refresh {
 	background: var(--disqus-accent) !important;
 }
@@ -861,7 +843,6 @@ body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color
 }
 
 /* Unified button styling */
-
 #posts > button,
 #posts > div.load-more-refresh.load-more-refresh--v2 > a {
 	border-radius: var(--disqus-radius-sm) !important;
@@ -872,7 +853,6 @@ body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color
 }
 
 /* Sorting tab: selected state themed */
-
 .sort-menu-refresh__item.selected > a {
 	color: var(--disqus-accent) !important;
 	border-bottom: 4px solid var(--disqus-accent) !important;
@@ -884,7 +864,6 @@ body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color
 }
 
 /* Toolbar button styling */
-
 ._toolbar_k0g7a_47 ._actions_k0g7a_78 > button {
 	border-radius: 8px !important;
 	background-color: var(--disqus-accent) !important;
@@ -901,16 +880,14 @@ button._cancel_k0g7a_126 {
 }
 
 /* Main user menu */
-
 .dropdown-menu.dropdown-menu--refresh {
 	border-radius: var(--disqus-radius-sm) !important;
 }
 
 .dropdown-menu.dropdown-menu--refresh li a {
-	font-size: 14px !important;     /* adjust font size */
-	padding-top: 4px !important;    /* adjust vertical spacing */
+	font-size: 14px !important;
+	padding-top: 4px !important;
 	padding-bottom: 4px !important;
-	/* line-height: 1.4 !important; optional fine-tuning */
 }
 
 .dropdown-menu.dropdown-menu--refresh li a:hover {
@@ -918,13 +895,11 @@ button._cancel_k0g7a_126 {
 }
 
 /* Mod badge styling */
-
 .badge.moderator .badge-content {
 	background-color: #b5bbc1 !important;
 }
 
 /* Pinned post styling */
-
 .pinned-icon {
 	visibility: hidden !important;
 }

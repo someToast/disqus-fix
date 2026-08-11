@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.8
+@version     3.9
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -109,9 +109,18 @@ body.wp-night-mode-on .header-image img {
 	filter: var(--dark-logo-filter);
 }
 
-/* Parent page hero image dimming */
-body.wp-night-mode-on header.entry-header.entry-hero .post-thumbnail img {
-	opacity: 0.25 !important;
+/* Parent page hero image: subtle dark overlay in night mode (leaves the image
+   itself intact; the ::after sits below the title/gradient wrapper). */
+body.wp-night-mode-on header.entry-header.entry-hero .post-thumbnail {
+	position: relative;
+}
+
+body.wp-night-mode-on header.entry-header.entry-hero .post-thumbnail::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.2);
+	pointer-events: none;
 }
 
 /* Dark mode: keep the hero text gradient overlay (no solid fill) */

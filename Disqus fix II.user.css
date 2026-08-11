@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.13
+@version     3.14
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -107,11 +107,14 @@ body.wp-night-mode-on .main-navigation .menu-item {
 	border-color: rgb(255 255 255 / 0.25) !important;
 }
 
-/* The menu-toggle's default hover/focus flips to a near-white background;
-   soften it to a subtle dark fill in night mode. */
+/* The menu-toggle and search-toggle default hover/focus flip to a near-white
+   background; soften them to a subtle dark fill in night mode. */
 body.wp-night-mode-on .main-navigation .menu-toggle:hover,
 body.wp-night-mode-on .main-navigation .menu-toggle:focus,
-body.wp-night-mode-on .main-navigation .menu-toggle:active {
+body.wp-night-mode-on .main-navigation .menu-toggle:active,
+body.wp-night-mode-on .search-toggle:hover,
+body.wp-night-mode-on .search-toggle:focus,
+body.wp-night-mode-on .search-toggle:active {
 	background-color: #2a2a2a !important;
 	border-color: rgb(255 255 255 / 0.25) !important;
 	color: var(--disqus-text-on-dark) !important;
@@ -130,6 +133,14 @@ body.wp-night-mode-on .search-field::placeholder {
 
 body.wp-night-mode-on .search-submit {
 	border-color: rgb(255 255 255 / 0.25) !important;
+}
+
+/* Opening search reveals white pseudo-element backdrops on the header and the
+   search form (this is what turned "the entire header white"); key them dark. */
+body.wp-night-mode-on .site-header::before,
+body.wp-night-mode-on .search-form::before,
+body.wp-night-mode-on .search-form {
+	background-color: #191919 !important;
 }
 
 /* Night mode: key the white logo bitmap to match the dark header (smart-invert).

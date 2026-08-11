@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.12
+@version     3.13
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -104,6 +104,31 @@ body.wp-night-mode-on .main-navigation.toggled > div:before {
 body.wp-night-mode-on .main-navigation .menu-toggle,
 body.wp-night-mode-on .main-navigation .dropdown-toggle,
 body.wp-night-mode-on .main-navigation .menu-item {
+	border-color: rgb(255 255 255 / 0.25) !important;
+}
+
+/* The menu-toggle's default hover/focus flips to a near-white background;
+   soften it to a subtle dark fill in night mode. */
+body.wp-night-mode-on .main-navigation .menu-toggle:hover,
+body.wp-night-mode-on .main-navigation .menu-toggle:focus,
+body.wp-night-mode-on .main-navigation .menu-toggle:active {
+	background-color: #2a2a2a !important;
+	border-color: rgb(255 255 255 / 0.25) !important;
+	color: var(--disqus-text-on-dark) !important;
+}
+
+/* Search field ships with a white background (light text is then invisible);
+   darken it in night mode and dim its border. */
+body.wp-night-mode-on .search-field {
+	background-color: #191919 !important;
+	border-color: rgb(255 255 255 / 0.25) !important;
+}
+
+body.wp-night-mode-on .search-field::placeholder {
+	color: rgb(255 255 255 / 0.45) !important;
+}
+
+body.wp-night-mode-on .search-submit {
 	border-color: rgb(255 255 255 / 0.25) !important;
 }
 

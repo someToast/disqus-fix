@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.9
+@version     3.10
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -215,6 +215,22 @@ body.wp-night-mode-on #indicator-north,
 body.wp-night-mode-on #indicator-south {
 	filter: invert(1) !important;
 	transform: translateZ(0) !important;
+}
+
+/* Dark mode: Previous/Next post-navigation banner — darken the featured image
+   behind the text (the anchor already overlays the image; bump it to 0.4). */
+body.wp-night-mode-on .post-navigation .nav-previous a,
+body.wp-night-mode-on .post-navigation .nav-next a {
+	background-color: rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Disqus "Also on The Avocado" recommendation cards: darken the thumbnail
+   behind the title. The cards live in a cross-origin iframe whose classes we
+   can't read; their <img> uniquely carries a non-empty title attribute
+   (comment/avatar images don't), and brightness(0.6) is identical to an
+   rgba(0,0,0,0.4) overlay over an opaque image. */
+img[title]:not([title=""]) {
+	filter: brightness(0.6) !important;
 }
 
 /* Cleaning up the look of the post header */

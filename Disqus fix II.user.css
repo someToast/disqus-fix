@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.14
+@version     3.15
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -133,6 +133,8 @@ body.wp-night-mode-on .search-field::placeholder {
 
 body.wp-night-mode-on .search-submit {
 	border-color: rgb(255 255 255 / 0.25) !important;
+	/* Hide the submit's "Search" label, which shows clipped inside the icon button */
+	text-indent: -9999px !important;
 }
 
 /* Opening search reveals white pseudo-element backdrops on the header and the
@@ -141,6 +143,12 @@ body.wp-night-mode-on .site-header::before,
 body.wp-night-mode-on .search-form::before,
 body.wp-night-mode-on .search-form {
 	background-color: #191919 !important;
+}
+
+/* The search magnifier glyph (.search-form::before) is the theme's green;
+   recolor it to the accent used for links/solid buttons. */
+body.wp-night-mode-on .search-form::before {
+	color: var(--disqus-accent) !important;
 }
 
 /* Night mode: key the white logo bitmap to match the dark header (smart-invert).

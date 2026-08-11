@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.11
+@version     3.12
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -96,6 +96,15 @@ body.wp-night-mode-on.long-menu .main-navigation > div:before,
 body.wp-night-mode-on .main-navigation.toggled > div:before {
 	background-color: #191919 !important;
 	border-color: #191919 !important;
+}
+
+/* Mobile menu: dim the bright default borders/dividers (the item separators,
+   the hamburger/close toggle box, and the dropdown-toggle boxes) to match the
+   desktop hairline treatment */
+body.wp-night-mode-on .main-navigation .menu-toggle,
+body.wp-night-mode-on .main-navigation .dropdown-toggle,
+body.wp-night-mode-on .main-navigation .menu-item {
+	border-color: rgb(255 255 255 / 0.25) !important;
 }
 
 /* Night mode: key the white logo bitmap to match the dark header (smart-invert).

@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.18
+@version     3.19
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -112,6 +112,34 @@ body.wp-night-mode-on .main-navigation .current-menu-ancestor > a {
    accent in both day and night, replacing the theme's green. */
 .main-navigation a::after {
 	color: var(--disqus-accent) !important;
+}
+
+/* Vertically center the day/night toggle with the text menu items sharing its
+   row. Its inner button is block-level and shorter than the 30px menu line box,
+   so it otherwise top-aligns and rides high; flex-centering against a matching
+   min-height lines it up. Also centers it within its row at the mobile menu. */
+.main-navigation li.wp-night-mode {
+	display: flex;
+	align-items: center;
+	min-height: 30px;
+}
+
+/* Center the switch's own parts on one line. The plugin lays the sun/moon icons
+   and the pill on the text baseline and nudges the SVGs up 1.875px, which
+   staggers them once the control is centered as a unit. Flex-center the button's
+   parts and cancel the SVG nudge so the icons and pill share one centerline. */
+.main-navigation li.wp-night-mode .wpnm-button {
+	display: flex;
+	align-items: center;
+}
+.main-navigation li.wp-night-mode .wpnm-button-sun,
+.main-navigation li.wp-night-mode .wpnm-button-moon {
+	display: flex;
+	align-items: center;
+}
+.main-navigation li.wp-night-mode .wpnm-button-sun svg,
+.main-navigation li.wp-night-mode .wpnm-button-moon svg {
+	top: 0 !important;
 }
 
 /* Mobile expanded menu container: remove heavy white frame in dark mode */

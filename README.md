@@ -5,7 +5,6 @@ Userstyle overrides for The Avocado and embedded Disqus threads.
 ## Files
 
 - `Disqus fix II.user.css`: current working stylesheet (active version)
-- `Disqus fix.user.css`: legacy/original stylesheet
 
 ## What This Changes
 

@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.17
+@version     3.18
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -82,6 +82,36 @@ body.wp-night-mode-on .main-navigation ul ul,
 body.wp-night-mode-on .main-navigation ul ul li {
 	background-color: #191919 !important;
 	border-color: #191919 !important;
+}
+
+/* Night mode: keep the main menu on its day palette in dark form — light text
+   where day is near-black — instead of the night-mode plugin's blue links. */
+body.wp-night-mode-on .main-navigation a {
+	color: var(--disqus-text-on-dark) !important;
+}
+
+/* Main-menu accent (hover / focus / active / current item) uses the blue accent
+   in both day and night, overriding the theme's green. The night-scoped copies
+   raise specificity above the light-text rule above. */
+.main-navigation a:hover,
+.main-navigation a:focus,
+.main-navigation a:active,
+.main-navigation .current-menu-item > a,
+.main-navigation .current_page_item > a,
+.main-navigation .current-menu-ancestor > a,
+body.wp-night-mode-on .main-navigation a:hover,
+body.wp-night-mode-on .main-navigation a:focus,
+body.wp-night-mode-on .main-navigation a:active,
+body.wp-night-mode-on .main-navigation .current-menu-item > a,
+body.wp-night-mode-on .main-navigation .current_page_item > a,
+body.wp-night-mode-on .main-navigation .current-menu-ancestor > a {
+	color: var(--disqus-accent) !important;
+}
+
+/* Menu dropdown carets and submenu arrows (Genericons a::after) use the blue
+   accent in both day and night, replacing the theme's green. */
+.main-navigation a::after {
+	color: var(--disqus-accent) !important;
 }
 
 /* Mobile expanded menu container: remove heavy white frame in dark mode */

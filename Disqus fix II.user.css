@@ -1,14 +1,17 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.16
+@version     3.17
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
 ==/UserStyle== */
 
+/* Avocado green replacement for --disqus-accent is #0a9051 2e9fff */
+
 :root {
 	--disqus-accent: #2e9fff;
+	--disqus-username-color: var(--disqus-accent);
 	--disqus-radius-sm: 4px;
 	--disqus-radius-md: 6px;
 	--disqus-avatar-size-parent: 50px;
@@ -458,6 +461,20 @@ a[data-role="username"],
 	letter-spacing: normal !important;
 }
 
+/* In-body content links in the accent colour (the theme defaults them to green).
+   Excludes profile links (aria-label), badges (aria-description), and links back
+   into the blog itself — timestamps and the "in reply to" reference both point
+   to the-avocado.org — so those keep their neutral tone. */
+body.roboto a[href^="http"]:not([aria-label]):not([aria-description]):not([href*="the-avocado.org"]) {
+	color: var(--disqus-accent) !important;
+}
+
+/* Comment header author username — its own variable so it can be coloured
+   separately from the other content links (defaults to the accent). */
+body.roboto a[aria-label^="View profile for"]:not([aria-description]) {
+	color: var(--disqus-username-color) !important;
+}
+
 /* Remove borders from "Edit", "View Profile", and "Private Profile" buttons */
 .hovercard-actions-container a,
 .hovercard-actions-container .btn.private {
@@ -591,11 +608,11 @@ a[data-role="username"],
 
 /* Vote color changes on selection */
 .post-votes .vote-up.upvoted .count {
-	color: #2e9fff !important;
+	color: var(--disqus-accent) !important;
 }
 
 .post-votes .vote-up.upvoted .control {
-	background-color: #2e9fff !important;
+	background-color: var(--disqus-accent) !important;
 }
 
 .post-votes .vote-down.downvoted .control {

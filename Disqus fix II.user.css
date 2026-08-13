@@ -7,7 +7,7 @@
 @match       *://*.disqus.com/*
 ==/UserStyle== */
 
-/* Avocado green replacement for --disqus-accent is #0a9051 2e9fff */
+/* Avocado green replacement to be used for --disqus-accent and --link-accent is #0a9051 */
 
 :root {
 	--disqus-accent: #2e9fff;

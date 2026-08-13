@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.24
+@version     3.25
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -151,6 +151,13 @@ body.custom-colors .more-link:focus {
    blue accent. (span selector to outrank the theme's .custom-colors rule.) */
 body.custom-colors span.sticky-post {
 	background-color: var(--disqus-accent) !important;
+}
+
+/* Jetpack "Related" posts: the grid gives every item after the first a 15px
+   left margin, indenting them when they stack. Align them all flush left like
+   the first item. */
+#jp-relatedposts .jp-relatedposts-post {
+	margin-left: 0 !important;
 }
 
 /* Vertically center the day/night toggle with the text menu items sharing its

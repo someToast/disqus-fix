@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.19
+@version     3.24
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -11,7 +11,10 @@
 
 :root {
 	--disqus-accent: #2e9fff;
-	--disqus-username-color: var(--disqus-accent);
+	/* Deeper blue for identity/title links: home-page article titles and Disqus
+	   commenter names. Distinct from the brighter --disqus-accent used elsewhere. */
+	--link-accent: #0071d1;
+	--disqus-username-color: var(--link-accent);
 	--disqus-radius-sm: 4px;
 	--disqus-radius-md: 6px;
 	--disqus-avatar-size-parent: 50px;
@@ -112,6 +115,42 @@ body.wp-night-mode-on .main-navigation .current-menu-ancestor > a {
    accent in both day and night, replacing the theme's green. */
 .main-navigation a::after {
 	color: var(--disqus-accent) !important;
+}
+
+/* Parent site article-title links use the deeper --link-accent (shared with
+   Disqus commenter names), instead of the theme's custom-colors green. */
+body.custom-colors .entry-title a,
+body.custom-colors .entry-title a:hover,
+body.custom-colors .entry-title a:focus {
+	color: var(--link-accent) !important;
+}
+
+/* Other main-content links ("Continue reading", in-body links) use the brighter
+   --disqus-accent. Scoped to the content region so meta/category/author labels
+   keep their neutral tones and the brand logo/title stay green. */
+body.custom-colors .entry-content a,
+body.custom-colors .entry-summary a,
+body.custom-colors .more-link,
+body.custom-colors .entry-content a:hover,
+body.custom-colors .entry-content a:focus,
+body.custom-colors .entry-summary a:hover,
+body.custom-colors .entry-summary a:focus,
+body.custom-colors .more-link:hover,
+body.custom-colors .more-link:focus {
+	color: var(--disqus-accent) !important;
+}
+
+/* Cookie Notice consent buttons (Ok / Privacy policy) ship with a green
+   background; key them to the blue accent. */
+#cookie-notice .cn-button {
+	background-color: var(--disqus-accent) !important;
+	border-color: var(--disqus-accent) !important;
+}
+
+/* Pinned/sticky article badges ship with a green background; key them to the
+   blue accent. (span selector to outrank the theme's .custom-colors rule.) */
+body.custom-colors span.sticky-post {
+	background-color: var(--disqus-accent) !important;
 }
 
 /* Vertically center the day/night toggle with the text menu items sharing its
@@ -925,6 +964,20 @@ body.roboto:not(.dark):not(.theme-dark):not([data-theme="dark"]):not([data-color
 	background-color: var(--disqus-accent) !important;
 	border: none !important;
 	font-size: 15px !important;
+}
+
+/* Comment-policy banner "Got it" button ships with the forum's green brand
+   background (.publisher-background-color); key it to the accent. */
+button.comment-policy-refresh__button {
+	background-color: var(--disqus-accent) !important;
+}
+
+/* Comment-policy banner "Comment Policy" link: green brand color to the accent.
+   [href] qualifier raises specificity above Disqus's own !important link rule. */
+a.comment-policy-refresh__link[href],
+a.comment-policy-refresh__link[href]:hover,
+a.comment-policy-refresh__link[href]:focus {
+	color: var(--disqus-accent) !important;
 }
 
 /* Sorting tab: selected state themed */

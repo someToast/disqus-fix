@@ -1,7 +1,7 @@
 /* ==UserStyle==
 @name        Disqus fix II
 @description Fix Disqus layout and appearance
-@version     3.25
+@version     3.26
 @author      Box of Cotton Swabs
 @match       *://the-avocado.org/*
 @match       *://*.disqus.com/*
@@ -1032,6 +1032,18 @@ button._cancel_k0g7a_126 {
 /* Mod badge styling */
 .badge.moderator .badge-content {
 	background-color: #b5bbc1 !important;
+}
+
+/* In dark mode the mod/leader badge keeps its light (#b5bbc1) background, but the
+   broad Disqus dark-text rule would turn its label light too (light-on-light);
+   force the label dark so it stays readable. */
+html[data-theme="dark"] body.roboto .badge.moderator .badge-content,
+body.roboto[data-theme="dark"] .badge.moderator .badge-content,
+html[data-color-scheme="dark"] body.roboto .badge.moderator .badge-content,
+body.roboto[data-color-scheme="dark"] .badge.moderator .badge-content,
+body.roboto.dark .badge.moderator .badge-content,
+body.roboto.theme-dark .badge.moderator .badge-content {
+	color: #2c2d30 !important;
 }
 
 /* Pinned post styling */

@@ -5,8 +5,10 @@ Userstyle overrides for The Avocado and embedded Disqus threads.
 ## Files
 
 - `Disqus fix II.user.css`: current working stylesheet (active version)
-- `Avocado Disqus night sync.user.js`: userscript that makes the Disqus comments
-  follow the site's night-mode toggle (not the OS `prefers-color-scheme`). On
+- `Avocado Disqus night sync.user.js`: **optional** companion to the stylesheet.
+  The stylesheet works on its own; this userscript adds greater reliability when
+  switching between light and dark modes by making the Disqus comments follow the
+  site's night-mode toggle (not the OS `prefers-color-scheme`). On
   toggle the parent side re-inits the embed (`DISQUS.reset`) with a matching
   `colorScheme` so Disqus renders its own light/dark backgrounds, and the frame
   side sets the theme markers the stylesheet keys off so text and background
